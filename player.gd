@@ -54,10 +54,10 @@ func check_collisions():
 	if(has_overlapping_areas()):
 		var objects = get_overlapping_areas()
 		for ob in objects: ##ob is a reference to an object in obects
-			match ob.is_in_group(x):
+			match ob.name:
 				'Pit':
 					fall()
 		print_debug(objects)
 	
 func fall():
-	
+	print_debug("You fell.")
