@@ -1,4 +1,5 @@
 extends Area2D
+class_name Player
 
 signal hit ##creates signal for hit
 
@@ -7,6 +8,8 @@ var BASE_SPEED = 400 ##Global for base speed of the player. Global needed for ca
 var screen_size
 var sprint_multi = 1.5 ##calculates how much sprint will affect your speed.
 var health = 100
+var has_control = true
+var velocity = Vector2.ZERO
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -18,22 +21,6 @@ func start(pos):
 	$CollisionShape2D.disabled = false
 	
 func _process(delta):
-	check_collisions()
-	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-		
-	if Input.is_action_pressed("sprint"):
-		sprint_multi = 1.5
-	else:
-		sprint_multi = 1
-	
 	if velocity.length() > 0:
 		
 		velocity = velocity.normalized() * speed * sprint_multi
@@ -50,14 +37,3 @@ func _process(delta):
 	position += velocity * delta * sprint_multi
 	position = position.clamp(Vector2.ZERO, screen_size)
 
-func check_collisions():
-	if(has_overlapping_areas()):
-		var objects = get_overlapping_areas()
-		for ob in objects: ##ob is a reference to an object in obects
-			match ob.name:
-				'Pit':
-					fall()
-		print_debug(objects)
-	
-func fall():
-	print_debug("You fell.")
