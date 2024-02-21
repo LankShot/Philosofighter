@@ -1,31 +1,25 @@
 extends State
 
 var player: Player
-var velocity: Vector2.ZERO
-var sprint_multi = 1.5
+var playerStateMachine: PlayerStateMachine
 
 func _ready():
-	player = get_parent()
-	velocity = player.velocity
-	
+	playerStateMachine = get_tree().get_first_node_in_group("PlayerStateMachine")
+	player = playerStateMachine.player
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-		
-	if Input.is_action_pressed("sprint"):
-		sprint_multi = 1.5
-	else:
-		sprint_multi = 1
+func _process(_delta):
+	player.check_input()
+	check_collisions()
 
+func enter():
+	print_debug("Player has entered MovingState")
+
+func exit():
+	player.velocity.x = 0
+	player.velocity.y = 0
+	print_debug("Player has exited MovingState")
 
 func check_collisions():
 	if(player.has_overlapping_areas()):
@@ -38,3 +32,4 @@ func check_collisions():
 
 func fall():
 	print_debug("You fell.")
+	transitioned.emit("fallingstate")

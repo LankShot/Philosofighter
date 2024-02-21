@@ -3,15 +3,18 @@ class_name PlayerStateMachine
 
 @export var initial_state : State
 
-
+var player : Player
 var current_state : State
 var states : Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player = get_tree().get_first_node_in_group("Player")
+	
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
+			child.transitioned.connect(on_child_transition)
 			
 	if initial_state:
 		initial_state.enter()

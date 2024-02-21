@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4x40am688nii"]
+[gd_scene load_steps=14 format=3 uid="uid://c4x40am688nii"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_iqmik"]
 [ext_resource type="Texture2D" uid="uid://bcl2832qdca3o" path="res://art/player/tempJump.png" id="2_o40h7"]
 [ext_resource type="Script" path="res://scripts/player/PlayerStateMachine.gd" id="3_j7oex"]
 [ext_resource type="Script" path="res://scripts/player/MovingState.gd" id="4_k0t1t"]
+[ext_resource type="Script" path="res://scripts/player/FallingState.gd" id="5_l1433"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y01ve"]
 atlas = ExtResource("2_o40h7")
@@ -80,4 +81,4 @@ script = ExtResource("3_j7oex")
 script = ExtResource("4_k0t1t")
 
 [node name="FallingState" type="Node2D" parent="PlayerStateMachine"]
-script = ExtResource("3_j7oex")
+script = ExtResource("5_l1433")

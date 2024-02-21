@@ -20,6 +20,21 @@ func start(pos):
 	show()
 	$CollisionShape2D.disabled = false
 	
+func check_input():
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1
+		
+	if Input.is_action_pressed("sprint"):
+		sprint_multi = 1.5
+	else:
+		sprint_multi = 1
+		
 func _process(delta):
 	if velocity.length() > 0:
 		
