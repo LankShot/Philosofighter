@@ -4,7 +4,7 @@ var player: Player
 var playerStateMachine: PlayerStateMachine
 
 func _ready():
-	playerStateMachine = get_tree().get_first_node_in_group("PlayerStateMachine")
+	playerStateMachine = get_parent()
 	player = playerStateMachine.player
 
 

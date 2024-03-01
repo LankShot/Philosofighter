@@ -10,8 +10,11 @@ var sprint_multi = 1.5 ##calculates how much sprint will affect your speed.
 var health = 100
 var has_control = true
 var velocity = Vector2.ZERO
+var playerStateMachine: PlayerStateMachine
+
 
 func _ready():
+	playerStateMachine = $PlayerStateMachine
 	screen_size = get_viewport_rect().size
 	hide()
 	
