@@ -8,6 +8,7 @@
 script = ExtResource("1_nth7j")
 
 [node name="Player" parent="." instance=ExtResource("2_bn5to")]
+top_level = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(1054, 428)

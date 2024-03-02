@@ -74,8 +74,9 @@ frame_progress = 0.584907
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ycl66")
 
-[node name="PlayerStateMachine" type="Node2D" parent="."]
+[node name="PlayerStateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_j7oex")
+initial_state = NodePath("MovingState")
 
 [node name="MovingState" type="Node2D" parent="PlayerStateMachine"]
 script = ExtResource("4_k0t1t")

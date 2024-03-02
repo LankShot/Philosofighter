@@ -11,5 +11,5 @@ func exit():
 	print_debug("Player has exited FallingState")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func update(_delta):
 	pass
