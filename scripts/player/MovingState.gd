@@ -1,9 +1,9 @@
 extends State
 
 var player: Player
-var playerStateMachine: PlayerStateMachine
 var velocity = Vector2.ZERO
 var is_sprinting = false
+var objects : Array[Area2D]
 
 func _ready():
 	player = get_owner()
@@ -15,6 +15,7 @@ func update(_delta):
 	check_collisions()
 
 func enter():
+	objects = []
 	print_debug("Player has entered MovingState")
 
 func exit():
@@ -24,7 +25,7 @@ func exit():
 
 func check_collisions():
 	if(player.has_overlapping_areas()):
-		var objects = player.get_overlapping_areas()
+		objects = player.get_overlapping_areas()
 		for ob in objects: ##ob is a reference to an object in obects
 			match ob.name:
 				'Pit':

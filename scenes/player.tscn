@@ -83,3 +83,4 @@ script = ExtResource("4_k0t1t")
 
 [node name="FallingState" type="Node2D" parent="PlayerStateMachine"]
 script = ExtResource("5_l1433")
+damage = 50.0
