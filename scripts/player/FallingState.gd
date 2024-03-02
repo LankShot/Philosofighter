@@ -12,10 +12,8 @@ func enter():
 
 func exit():
 	print_debug("Player has exited FallingState")
-	var spawn_point = get_tree().current_scene.find_child("StartPosition")
-	player.position = spawn_point.position
-	player.set_scale(Vector2.ONE)
-	player.set_global_rotation(0)
+
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func physics_update(_delta):
@@ -25,5 +23,9 @@ func physics_update(_delta):
 		scale_vector.y -= .01
 		player.set_scale(scale_vector)
 	else:
+		var spawn_point = get_tree().current_scene.find_child("StartPosition")
+		player.set_scale(Vector2.ONE)
+		player.set_global_rotation(0)
+		player.position = spawn_point.position
 		transitioned.emit(self, "movingstate")
 	

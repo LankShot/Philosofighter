@@ -25,7 +25,7 @@ func start(pos):
 	$CollisionShape2D.disabled = false
 	
 
-func _process(delta):
+func _physics_process(delta):
 	if velocity.length() > 0:
 		if(is_sprinting):
 			velocity = velocity.normalized() * speed * sprint_multi

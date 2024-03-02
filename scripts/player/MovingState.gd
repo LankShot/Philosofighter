@@ -10,7 +10,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func update(_delta):
+func physics_update(_delta):
 	check_input()
 	check_collisions()
 
