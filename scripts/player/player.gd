@@ -3,8 +3,8 @@ class_name Player
 
 signal hit ##creates signal for hit
 
-var BASE_SPEED = 400 ##Global for base speed of the player. Global needed for calculating frame speed
-@export var speed = BASE_SPEED
+@export var speed : int
+@export var dodge_time : int
 var screen_size
 var sprint_multi = 1.5 ##calculates how much sprint will affect your speed.
 var is_sprinting = false
