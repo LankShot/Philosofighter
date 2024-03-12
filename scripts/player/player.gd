@@ -2,16 +2,19 @@ extends Area2D
 class_name Player
 
 signal hit ##creates signal for hit
+signal fall ##emits signal for collisions with pits
 
 @export var speed : int
 @export var dodge_time : int
+@export var attack_speed : int
 var screen_size
 var sprint_multi = 1.5 ##calculates how much sprint will affect your speed.
 var is_sprinting = false
 var health = 100
-var has_control = true
 var velocity = Vector2.ZERO
 var playerStateMachine: PlayerStateMachine
+var objects : Array[Area2D]
+var direction = 0
 
 
 func _ready():
@@ -25,7 +28,16 @@ func start(pos):
 	$CollisionShape2D.disabled = false
 	
 
-func _physics_process(delta):
+func check_collisions():
+	if(has_overlapping_areas()):
+		objects = get_overlapping_areas()
+		for ob in objects: ##ob is a reference to an object in obects
+			match ob.name:
+				'Pit':
+					fall.emit()
+		print_debug(objects)
+
+func move(delta):
 	if velocity.length() > 0:
 		if(is_sprinting):
 			velocity = velocity.normalized() * speed * sprint_multi
@@ -44,3 +56,39 @@ func _physics_process(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
+func check_direction():
+	var return_velocity = Vector2.ZERO
+	if Input.is_action_pressed("move_right"):
+		return_velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		return_velocity.x -= 1
+	if Input.is_action_pressed("move_down"):
+		return_velocity.y += 1
+	if Input.is_action_pressed("move_up"):
+		return_velocity.y -= 1
+	match return_velocity.x:
+		0: 
+			match return_velocity.y:
+				0:
+					pass #no input = no change
+				1:
+					direction = 0 #down
+				-1:
+					direction = 4 #up
+		1: 
+			match return_velocity.y:
+				0:
+					direction = 2 #right
+				1:
+					direction = 1 #down right
+				-1:
+					direction = 3 #up right
+		-1:
+			match return_velocity.y:
+				0:
+					direction = 6 #left
+				1:
+					direction = 7 #down left
+				-1:
+					direction = 5 #up left
+	return return_velocity

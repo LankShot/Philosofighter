@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4x40am688nii"]
+[gd_scene load_steps=16 format=3 uid="uid://c4x40am688nii"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_iqmik"]
 [ext_resource type="Texture2D" uid="uid://bcl2832qdca3o" path="res://art/player/tempJump.png" id="2_o40h7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/player/MovingState.gd" id="4_k0t1t"]
 [ext_resource type="Script" path="res://scripts/player/FallingState.gd" id="5_l1433"]
 [ext_resource type="Script" path="res://scripts/player/DodgingState.gd" id="6_oceyy"]
+[ext_resource type="Script" path="res://scripts/player/AttackState.gd" id="7_phmsh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y01ve"]
 atlas = ExtResource("2_o40h7")
@@ -69,6 +70,7 @@ size = Vector2(10, 10)
 script = ExtResource("1_iqmik")
 speed = 200
 dodge_time = 100
+attack_speed = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jxve2")
@@ -91,3 +93,6 @@ damage = 50.0
 [node name="DodgingState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_oceyy")
 velocity_change = 5.0
+
+[node name="AttackState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("7_phmsh")

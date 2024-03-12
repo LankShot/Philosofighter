@@ -20,19 +20,14 @@ func exit():
 func physics_update(delta):
 	if dodge_time > 0:
 		check_input()
+		player.position += velocity * delta
+		player.position = player.position.clamp(Vector2.ZERO, player.screen_size)
+		velocity = Vector2.ZERO
 		dodge_time -= delta
+		player.move(delta)
 	else:
 		transitioned.emit(self, "movingstate")
 
 func check_input():
-	if Input.is_action_pressed("move_right"):
-		velocity.x += velocity_change
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= velocity_change
-	if Input.is_action_pressed("move_down"):
-		velocity.y += velocity_change
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= velocity_change
-	
-	player.velocity = start_velocity + velocity
-	velocity = Vector2.ZERO
+	velocity = player.check_direction()
+	velocity = velocity.normalized() * round(player.speed) / 2 
