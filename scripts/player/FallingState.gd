@@ -4,10 +4,11 @@ var player: Player
 @export var damage : float
 var scale_vector = Vector2.ONE
 
+func _ready():
+	player = get_owner()
 
 func enter():
 	print_debug("Player has entered FallingState")
-	player = get_owner()
 	scale_vector = player.get_scale()
 
 func exit():

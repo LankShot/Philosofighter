@@ -25,7 +25,7 @@ func exit():
 
 func check_input():
 	player.velocity = player.check_direction()
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack") or Input.is_action_pressed("attack_down") or Input.is_action_pressed("attack_right") or Input.is_action_pressed("attack_left") or Input.is_action_pressed("attack_up"):
 		transitioned.emit(self,"attackstate")
 	if Input.is_action_pressed("sprint"):
 		is_sprinting = true

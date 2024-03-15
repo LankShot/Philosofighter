@@ -9,7 +9,7 @@ var dodge_time : int
 func enter():
 	print_debug("Player has entered DodgingState")
 	player = get_owner()
-	start_velocity = player.velocity * 1.25
+	start_velocity = player.velocity
 	dodge_time = player.dodge_time
 
 func exit():

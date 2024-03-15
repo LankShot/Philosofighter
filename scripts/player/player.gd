@@ -6,7 +6,7 @@ signal fall ##emits signal for collisions with pits
 
 @export var speed : int
 @export var dodge_time : int
-@export var attack_speed : int
+@export var attack_speed : float
 var screen_size
 var sprint_multi = 1.5 ##calculates how much sprint will affect your speed.
 var is_sprinting = false
@@ -14,7 +14,7 @@ var health = 100
 var velocity = Vector2.ZERO
 var playerStateMachine: PlayerStateMachine
 var objects : Array[Area2D]
-var direction = 0
+var direction = 2
 
 
 func _ready():
@@ -36,6 +36,9 @@ func check_collisions():
 				'Pit':
 					fall.emit()
 		print_debug(objects)
+
+func _physics_process(_delta):
+	$PlayerStateMachine/AttackState/RotationPoint.position = position
 
 func move(delta):
 	if velocity.length() > 0:
@@ -66,29 +69,29 @@ func check_direction():
 		return_velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		return_velocity.y -= 1
-	match return_velocity.x:
+	match int(return_velocity.x):
 		0: 
-			match return_velocity.y:
+			match int(return_velocity.y):
 				0:
 					pass #no input = no change
 				1:
-					direction = 0 #down
+					direction = 2 #down
 				-1:
-					direction = 4 #up
+					direction = 6 #up
 		1: 
-			match return_velocity.y:
+			match int(return_velocity.y):
 				0:
-					direction = 2 #right
+					direction = 0 #right
 				1:
 					direction = 1 #down right
 				-1:
-					direction = 3 #up right
+					direction = 7 #up right
 		-1:
-			match return_velocity.y:
+			match int(return_velocity.y):
 				0:
-					direction = 6 #left
+					direction = 4 #left
 				1:
-					direction = 7 #down left
+					direction = 3 #down left
 				-1:
 					direction = 5 #up left
 	return return_velocity
