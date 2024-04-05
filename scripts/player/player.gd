@@ -42,6 +42,7 @@ func _physics_process(_delta):
 
 func move(delta):
 	if velocity.length() > 0:
+		update_direction()
 		if(is_sprinting):
 			velocity = velocity.normalized() * speed * sprint_multi
 		else:
@@ -50,14 +51,42 @@ func move(delta):
 	else:
 		$AnimatedSprite2D.stop()
 		
-	if velocity.x < 0:
-		$AnimatedSprite2D.flip_h = true
-	else:
-		$AnimatedSprite2D.flip_h = false
+	
+	
 	
 	##$AnimatedSprite2D.animation.set_speed_scale( float(speed*sprint_multi)/BASE_SPEED)
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
+
+func update_direction():
+	$AnimatedSprite2D.rotation = 0
+	match direction:
+		0:
+			$AnimatedSprite2D.animation = "left_right_walk"
+			$AnimatedSprite2D.flip_h = false
+		1:
+			$AnimatedSprite2D.animation = "downLR_walk"
+			$AnimatedSprite2D.flip_h = false
+		2:
+			$AnimatedSprite2D.animation = "up_down_walk"
+			$AnimatedSprite2D.rotation = 1.571
+			$AnimatedSprite2D.flip_h = false
+		3:
+			$AnimatedSprite2D.animation = "downLR_walk"
+			$AnimatedSprite2D.flip_h = true
+		4:
+			$AnimatedSprite2D.animation = "left_right_walk"
+			$AnimatedSprite2D.flip_h = true
+		5:
+			$AnimatedSprite2D.animation = "upLR_walk"
+			$AnimatedSprite2D.flip_h = true
+		6:
+			$AnimatedSprite2D.animation = "up_down_walk"
+			$AnimatedSprite2D.rotation = 4.712
+			$AnimatedSprite2D.flip_h = false
+		7:
+			$AnimatedSprite2D.animation = "upLR_walk"
+			$AnimatedSprite2D.flip_h = false
 
 func check_direction():
 	var return_velocity = Vector2.ZERO
@@ -95,3 +124,12 @@ func check_direction():
 				-1:
 					direction = 5 #up left
 	return return_velocity
+
+func pressing_any_attack():
+	if(Input.is_action_pressed("attack_down")
+	or Input.is_action_pressed("attack_right") 
+	or Input.is_action_pressed("attack_left") 
+	or Input.is_action_pressed("attack_up")):
+		return true
+	else:
+		return false
