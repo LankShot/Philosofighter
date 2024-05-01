@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://ducfsm8mffnlu"]
+
+[ext_resource type="Script" path="res://scenes/EnemyMk1.gd" id="1_e5uu7"]
+[ext_resource type="Texture2D" uid="uid://c77mn0iqvq6v8" path="res://art/whitebox.png" id="1_ea74l"]
+[ext_resource type="Script" path="res://scripts/StateMachineHandler.gd" id="2_5xmku"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tnm0"]
+atlas = ExtResource("1_ea74l")
+region = Rect2(0, 0, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cpso"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tnm0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7p02"]
+size = Vector2(50, 50)
+
+[node name="EnemyMk1" type="Area2D"]
+script = ExtResource("1_e5uu7")
+health = null
+speed = null
+detect_radius = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(50, 50)
+sprite_frames = SubResource("SpriteFrames_0cpso")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d7p02")
+
+[node name="EnemyStateMachine" type="Node" parent="."]
+script = ExtResource("2_5xmku")
+
+[node name="Visibility" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visibility"]

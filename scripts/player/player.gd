@@ -12,7 +12,7 @@ var sprint_multi = 1.5 ##calculates how much sprint will affect your speed.
 var is_sprinting = false
 var health = 100
 var velocity = Vector2.ZERO
-var playerStateMachine: PlayerStateMachine
+var playerStateMachine: StateMachineHandler
 var objects : Array[Area2D]
 var direction = 2
 

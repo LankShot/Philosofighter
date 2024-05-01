@@ -1,13 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4x40am688nii"]
+[gd_scene load_steps=24 format=3 uid="uid://ddgvu7qtj3th4"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_iqmik"]
 [ext_resource type="Texture2D" uid="uid://ctyj7ciynaqbu" path="res://art/player/tempJumpDLR.png" id="2_hoe13"]
 [ext_resource type="Texture2D" uid="uid://bcl2832qdca3o" path="res://art/player/tempJump.png" id="2_o40h7"]
-[ext_resource type="Script" path="res://scripts/player/PlayerStateMachine.gd" id="3_j7oex"]
 [ext_resource type="Texture2D" uid="uid://ufsor2n3gjgn" path="res://art/player/tempJumpULR.png" id="3_m848c"]
 [ext_resource type="Texture2D" uid="uid://b1fjhttmbfwkg" path="res://art/player/tempJumpUD.png" id="3_mw8b8"]
 [ext_resource type="Script" path="res://scripts/player/MovingState.gd" id="4_k0t1t"]
 [ext_resource type="Script" path="res://scripts/player/FallingState.gd" id="5_l1433"]
+[ext_resource type="Script" path="res://scripts/StateMachineHandler.gd" id="6_6ux7k"]
 [ext_resource type="Script" path="res://scripts/player/DodgingState.gd" id="6_oceyy"]
 [ext_resource type="Script" path="res://scripts/player/AttackState.gd" id="7_phmsh"]
 [ext_resource type="Texture2D" uid="uid://c77mn0iqvq6v8" path="res://art/whitebox.png" id="8_vlbot"]
@@ -123,7 +123,7 @@ animation = &"jump"
 shape = SubResource("RectangleShape2D_ycl66")
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_j7oex")
+script = ExtResource("6_6ux7k")
 initial_state = NodePath("MovingState")
 
 [node name="MovingState" type="Node" parent="PlayerStateMachine"]
