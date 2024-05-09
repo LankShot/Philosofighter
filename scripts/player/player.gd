@@ -16,7 +16,6 @@ var playerStateMachine: StateMachineHandler
 var objects : Array[Area2D]
 var direction = 2
 
-
 func _ready():
 	playerStateMachine = $PlayerStateMachine
 	screen_size = get_viewport_rect().size

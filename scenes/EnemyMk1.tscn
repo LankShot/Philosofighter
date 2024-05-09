@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ducfsm8mffnlu"]
+[gd_scene load_steps=8 format=3 uid="uid://ducfsm8mffnlu"]
 
 [ext_resource type="Script" path="res://scenes/EnemyMk1.gd" id="1_e5uu7"]
 [ext_resource type="Texture2D" uid="uid://c77mn0iqvq6v8" path="res://art/whitebox.png" id="1_ea74l"]
 [ext_resource type="Script" path="res://scripts/StateMachineHandler.gd" id="2_5xmku"]
+[ext_resource type="Script" path="res://scenes/WanderState.gd" id="4_5wsts"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7tnm0"]
 atlas = ExtResource("1_ea74l")
@@ -24,9 +25,6 @@ size = Vector2(50, 50)
 
 [node name="EnemyMk1" type="Area2D"]
 script = ExtResource("1_e5uu7")
-health = null
-speed = null
-detect_radius = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
@@ -36,8 +34,12 @@ sprite_frames = SubResource("SpriteFrames_0cpso")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d7p02")
 
-[node name="EnemyStateMachine" type="Node" parent="."]
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_5xmku")
+initial_state = NodePath("WanderState")
+
+[node name="WanderState" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("4_5wsts")
 
 [node name="Visibility" type="Area2D" parent="."]
 
